@@ -12,11 +12,13 @@ namespace K01.NetCoreMvcGiris.Controllers
     {
         readonly UserManager<UygKullanici> _userManager;
         readonly SignInManager<UygKullanici> _signInManager;
+        readonly RoleManager<UygRol> _roleManager;
 
-        public AdminController(UserManager<UygKullanici> userManager, SignInManager<UygKullanici> signInManager)
+        public AdminController(UserManager<UygKullanici> userManager, SignInManager<UygKullanici> signInManager,RoleManager<UygRol> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _roleManager = roleManager;
 
         }
 
@@ -34,6 +36,7 @@ namespace K01.NetCoreMvcGiris.Controllers
             return View(model);
         }
 
+        #region Kullanici Islemleri
         [Authorize]
         public IActionResult SifreDegistir()
         {
@@ -104,12 +107,12 @@ namespace K01.NetCoreMvcGiris.Controllers
                 kullanici.UserName = model.KullaniciAd;
                 kullanici.PhoneNumber = model.Telefon;
 
-                var sonuc= _userManager.UpdateAsync(kullanici).Result;
+                var sonuc = _userManager.UpdateAsync(kullanici).Result;
                 if (sonuc.Succeeded)
                 {
                     await _userManager.UpdateSecurityStampAsync(kullanici);
                     await _signInManager.SignOutAsync();
-                     await _signInManager.SignInAsync(kullanici, true);
+                    await _signInManager.SignInAsync(kullanici, true);
                     return RedirectToAction("Index", "Admin");
                 }
                 else
@@ -124,6 +127,47 @@ namespace K01.NetCoreMvcGiris.Controllers
         }
 
 
+        #endregion
+
+
+        #region Role Islemleri
+
+        public IActionResult Roller()
+        {
+            return View(_roleManager.Roles.ToList());
+        }
+
+        public IActionResult RolEkle()
+        {
+            return View(new RolModel());
+        }
+
+        [HttpPost]
+        public IActionResult RolEkle(RolModel model)
+        {
+            if (ModelState.IsValid)
+            {
+               var sonuc=  _roleManager.CreateAsync(new UygRol()
+                {
+                    Name = model.Name
+                }).Result;
+
+                if (sonuc.Succeeded)
+                {
+                    return RedirectToAction("Roller", "Admin");
+                }
+                else
+                {
+                    foreach (var item in sonuc.Errors)
+                    {
+                        ModelState.AddModelError("", item.Description);
+                    }
+                }
+            }
+            return View(model);
+        }
+
+        #endregion
         public IActionResult CikisYap()
         {
             _signInManager.SignOutAsync();
