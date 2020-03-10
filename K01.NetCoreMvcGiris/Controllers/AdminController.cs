@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System.Threading.Tasks;
 using K01.NetCoreMvcGiris.Entities;
 using K01.NetCoreMvcGiris.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -11,12 +12,12 @@ namespace K01.NetCoreMvcGiris.Controllers
     {
         readonly UserManager<UygKullanici> _userManager;
         readonly SignInManager<UygKullanici> _signInManager;
-        
+
         public AdminController(UserManager<UygKullanici> userManager, SignInManager<UygKullanici> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-           
+
         }
 
         [Authorize]
@@ -49,7 +50,7 @@ namespace K01.NetCoreMvcGiris.Controllers
                 //var sifresiDogrumu= _userManager.CheckPasswordAsync(kullanici, model.EskiSifre).Result;
                 //if (sifresiDogrumu)
                 //{
-                var sonuc =_userManager.ChangePasswordAsync(kullanici, model.EskiSifre, model.Sifre).Result;
+                var sonuc = _userManager.ChangePasswordAsync(kullanici, model.EskiSifre, model.Sifre).Result;
 
                 if (sonuc.Succeeded)
                 {
@@ -60,7 +61,7 @@ namespace K01.NetCoreMvcGiris.Controllers
                 {
                     foreach (var item in sonuc.Errors)
                     {
-                        ModelState.AddModelError("",item.Description);
+                        ModelState.AddModelError("", item.Description);
                     }
                 }
                 //}
@@ -79,7 +80,48 @@ namespace K01.NetCoreMvcGiris.Controllers
             return View(_userManager.Users.ToList());
         }
 
+        public IActionResult KullaniciGuncelle()
+        {
+            var kullanici = _userManager.FindByNameAsync(User.Identity.Name).Result;
+            KullaniciViewModel model = new KullaniciViewModel
+            {
+                Email = kullanici.Email,
+                KullaniciAd = kullanici.UserName,
+                Telefon = kullanici.PhoneNumber
+            };
 
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> KullaniciGuncelle(KullaniciViewModel model)
+        {
+            ModelState.Remove(nameof(KullaniciViewModel.Sifre));
+            if (ModelState.IsValid)
+            {
+                var kullanici = _userManager.FindByNameAsync(User.Identity.Name).Result;
+                kullanici.Email = model.Email;
+                kullanici.UserName = model.KullaniciAd;
+                kullanici.PhoneNumber = model.Telefon;
+
+                var sonuc= _userManager.UpdateAsync(kullanici).Result;
+                if (sonuc.Succeeded)
+                {
+                    await _userManager.UpdateSecurityStampAsync(kullanici);
+                    await _signInManager.SignOutAsync();
+                     await _signInManager.SignInAsync(kullanici, true);
+                    return RedirectToAction("Index", "Admin");
+                }
+                else
+                {
+                    foreach (var error in sonuc.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            return View(model);
+        }
 
 
         public IActionResult CikisYap()
