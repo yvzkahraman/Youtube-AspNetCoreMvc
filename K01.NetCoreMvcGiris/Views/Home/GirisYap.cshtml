@@ -1,0 +1,30 @@
+﻿@model KullaniciGirisViewModel
+@{
+    ViewData["Title"] = "GirisYap";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <form class="w-50 mx-auto shadow mt-3 p-4" method="post" asp-action="GirisYap" asp-controller="Home">
+        <div class="form-group">
+            <label asp-for="KullaniciAd"></label>
+            <span asp-validation-for="KullaniciAd" class="text-danger"></span>
+            <input asp-for="KullaniciAd" class="form-control"/>
+        </div>
+        <div class="form-group">
+            <label asp-for="Sifre"></label>
+            <span asp-validation-for="Sifre" class="text-danger"></span>
+            <input asp-for="Sifre" class="form-control" />
+        </div>
+        <div class="form-group form-check">
+            <input asp-for="BeniHatirla" type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" asp-for="BeniHatirla">Beni hatırla</label>
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn btn-info">Giriş Yap</button>
+        </div>
+        <div class="text-danger" asp-validation-summary="ModelOnly">
+
+        </div>
+    </form>
+
+

@@ -1,0 +1,54 @@
+﻿
+@model List<K01.NetCoreMvcGiris.Entities.Kategori>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <section class="container">
+        <a asp-action="KategoriEkle" asp-controller="Home" class="btn btn-primary btn-sm">Yeni Kategori</a>
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="table-responsive mt-3">
+                    <table class="table table-hover table-striped table-bordered table-sm">
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Isim</th>
+                                <th>İşlem</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var kategori in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @kategori.Id
+                                    </td>
+                                    <td>
+                                        @kategori.Ad
+                                    </td>
+                                    @*
+
+                                    {controller}/{action}/{id?}
+                                    *@
+                                    <td>
+
+                                        <a href="/Home/KategoriDuzenle/@kategori.Id" class="btn btn-primary btn-sm"> Düzenle</a>
+
+                                        <a asp-action="KategoriSil" asp-controller="Home" asp-route-id="@kategori.Id" class="btn btn-danger btn-sm">Sil</a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+
+
+

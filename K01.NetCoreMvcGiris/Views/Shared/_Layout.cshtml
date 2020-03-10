@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Müşteri Uygulaması</title>
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <header>
+       @Html.Partial("_navbar")
+    </header>
+    <section class="container">
+        @RenderBody()
+    </section>
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/popper/esm/popper.min.js"></script>
+    <script src="~/lib/bootstrap/js/bootstrap.min.js"></script>
+    @RenderSection("JavaScript", false)
+</body>
+</html>

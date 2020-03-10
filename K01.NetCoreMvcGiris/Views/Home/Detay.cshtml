@@ -1,0 +1,43 @@
+﻿@model Musteri
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="container">
+
+
+    <div class="bg-success p-3 text-white">
+        @Model.Ad Bilgileri
+    </div>
+
+
+    <div class="table-responsive mt-3">
+        <table class="table table-hover table-striped table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Isim</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td>
+                        @Model.Id
+                    </td>
+                    <td>
+                        @Model.Ad
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+</section>
+
+
+
+
+
+

@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewData["Title"] = "MusteriList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>MusteriList</h1>
+
+<section class="container">
+
+    <a asp-action="MusteriEkle" asp-controller="Home" class="btn btn-primary btn-sm">Yeni Müşteri</a>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="table-responsive mt-3">
+                <table class="table table-hover table-striped table-bordered table-sm">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Isim</th>
+                            <th>İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var musteri in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @musteri.Id
+                                </td>
+                                <td>
+                                    @musteri.Ad
+                                </td>
+                                @*
+
+                                    {controller}/{action}/{id?}
+                                *@
+                            <td>
+                                <a href="/Home/Detay/@musteri.Id" class="btn btn-primary btn-sm"> Detay Getir</a>
+                                <a href="/Home/MusteriDuzenle/@musteri.Id" class="btn btn-primary btn-sm"> Düzenle</a>
+                                <a asp-action="MusteriSil" asp-controller="Home" asp-route-id="@musteri.Id" class="btn btn-danger btn-sm">Sil</a>
+                            </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+
+</section>

@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<section class="container">
+    <table class="mt-5 table table-hover table-bordered">
+        <tr>
+            <th>Singleton1</th>
+            <td>@ViewBag.Singleton1</td>
+        </tr>
+        <tr>
+            <th>Singleton2</th>
+            <td>@ViewBag.Singleton2</td>
+        </tr>
+
+        <tr>
+            <th>Scoped1</th>
+            <td>@ViewBag.Scoped1</td>
+        </tr>
+        <tr>
+            <th>Scoped2</th>
+            <td>@ViewBag.Scoped2</td>
+        </tr>
+
+        <tr>
+            <th>Transient1</th>
+            <td>@ViewBag.Transient1</td>
+        </tr>
+        <tr>
+            <th>Transient2</th>
+            <td>@ViewBag.Transient2</td>
+        </tr>
+
+    </table>
+</section>

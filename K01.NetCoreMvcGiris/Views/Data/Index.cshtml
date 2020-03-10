@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Taşıma</title>
+    <link href="~/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <section class="container">
+        <table class="mt-5 table table-hover table-bordered">
+            <tr>
+                <th>ViewBag.Kisi</th>
+                <td>@ViewBag.Kisi</td>
+            </tr>
+            <tr>
+                <th>ViewData["Kisi"]</th>
+                <td>@ViewData["Kisi"]</td>
+            </tr>
+            <tr>
+                <th>TempData["Kisi"]</th>
+                <td>@TempData["Kisi"]</td>
+            </tr>
+        </table>
+    </section>
+</body>
+</html>

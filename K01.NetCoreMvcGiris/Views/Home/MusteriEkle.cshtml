@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewData["Title"] = "MusteriEkle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>MusteriEkle</h1>
+
+<form action="\Home\MusteriEklePost" method="post">
+    <div class="form-group">
+        <label>Musteri Adı:</label>
+        <input type="text" name="isim" class="form-control"/>
+    </div>
+
+    <div class="form-group">
+       
+        <input type="submit" class="btn btn-primary" value="Kaydet" />
+    </div>
+
+</form>

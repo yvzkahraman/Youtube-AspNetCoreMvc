@@ -1,0 +1,43 @@
+﻿@model KullaniciViewModel
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+    <div class="row">
+        @if (TempData["islem"] != null)
+        {
+            <div class="col-md-12">
+                <div class="alert alert-dark text-white">
+                    @TempData["islem"]
+                </div>
+            </div>
+        }
+
+
+        <div class="col-md-12">
+            <div class="btn-group" role="group">
+                <a asp-action="SifreDegistir" asp-controller="Admin" class="btn btn-primary">Şifre Değiştir</a>
+                <a asp-action="Guncelle" asp-controller="Admin" class="btn btn-danger">Bilgilerimi Güncelle</a>
+                <a asp-action="CikisYap" asp-controller="Admin" class="btn btn-success">Çıkış Yap</a>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <table class="table table-bordered table-sm">
+                <tr>
+                    <th>Email</th>
+                    <td>@Model.Email</td>
+                </tr>
+                <tr>
+                    <th>Kullanici Ad</th>
+                    <td>@Model.KullaniciAd</td>
+                </tr>
+                <tr>
+                    <th>Telefon</th>
+                    <td>@Model.Telefon</td>
+                </tr>
+            </table>
+        </div>
+    </div>

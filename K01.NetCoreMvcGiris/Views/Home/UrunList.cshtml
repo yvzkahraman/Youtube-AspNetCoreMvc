@@ -1,0 +1,100 @@
+﻿@model List<Urun>
+@{
+    ViewData["Title"] = "UrunList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<a asp-action="UrunEkle" asp-controller="Home" class="btn btn-primary">Yeni Ürün</a>
+
+<table class="table table-bordered table-sm">
+    <thead>
+        @*
+
+                 public int Id { get; set; }
+            public string Ad { get; set; }
+            public string Aciklama { get; set; }
+            public decimal Fiyat { get; set; }
+            public int KategoriId { get; set; }
+            public string ResimUrl { get; set; }
+        *@
+
+        <tr>
+            <th>Ad</th>
+            <th>Aciklama</th>
+            <th>Fiyat</th>
+            <th>KategoriId</th>
+            <th>ResimUrl</th>
+            <th>İşlem</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Ad</td>
+                <td>@item.Aciklama</td>
+                <td>@item.Fiyat</td>
+                <td>@item.KategoriId</td>
+                <td>@item.ResimUrl</td>
+                <td>
+                    <a asp-action="UrunDuzenle" asp-controller="Home" class="btn btn-warning" asp-route-id="@item.Id">Duzenle</a>
+                    <a data-whatever="@item.Id" class="btn btn-danger" data-target="#silmeEkrani" data-toggle="modal" >Sil</a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+
+<div class="pagination">
+    @for (int i = 1; i <= (int)ViewBag.ToplamSayfa; i++)
+    {
+        <div class="page-item @(ViewBag.AktifSayfa==i?"active":"")">
+            <a asp-action="Index" asp-controller="Home" asp-route-aktifSayfa="@i" class="page-link">@i</a>
+        </div>
+    }
+
+</div>
+
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="silmeEkrani" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">UYARI</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Silmek istediğinizden emin misiniz?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Vazgeç</button>
+                
+                <button type="button"  id="btnSil" class="btn btn-primary">Evet Sil</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section  JavaScript{ 
+    <script>
+        $(document).ready(function () {
+            $("#silmeEkrani").on("show.bs.modal", function (e) {
+                let button = $(e.relatedTarget);
+                let id = button.data("whatever");
+
+                $("#btnSil").click(function () {
+                    window.location = "./UrunSil/"+id;
+                });
+                
+            });
+        });
+    </script>
+}
+

@@ -1,0 +1,20 @@
+﻿@model K01.NetCoreMvcGiris.Entities.Kategori
+@{
+    ViewData["Title"] = "KategoriDuzenle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>KategoriDuzenle</h1>
+
+@using (Html.BeginForm("KategoriDuzenle","Home"))
+{
+    Html.AntiForgeryToken();
+    <div class="form-group">
+        @Html.LabelFor(I=>I.Ad)
+        @Html.TextBoxFor(I=>I.Ad,new {@class="form-control"})
+    </div>
+
+    <div class="form-group">
+        <input type="submit" class="btn btn-primary" value="Kaydet" />
+    </div>
+}

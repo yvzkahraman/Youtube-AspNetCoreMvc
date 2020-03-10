@@ -1,0 +1,13 @@
+﻿@model List<Kategori>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<paragraf paragraf-icerik="Selam Core MVC Süper!!!" paragraf-renk="danger"></paragraf>
+
+<listgroup kategoriler="@Model"></listgroup>
+
+<sayfala aktif-sayfa="ViewBag.AktifSayfa" toplam-sayfa="20"></sayfala>

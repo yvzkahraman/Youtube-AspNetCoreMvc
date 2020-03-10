@@ -1,0 +1,22 @@
+﻿@model K01.NetCoreMvcGiris.Entities.Musteri
+@{
+    ViewData["Title"] = "MusteriEkle";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>MusteriDuzenle</h1>
+
+<form action="\Home\MusteriDuzenle" method="post">
+    @*@Html.HiddenFor(I=>I.Id)*@
+    <input type="hidden" value="@Model.Id" name="id" />
+    <div class="form-group">
+        <label>Musteri Adı:</label>
+        <input type="text" name="ad" value="@Model.Ad" class="form-control" />
+    </div>
+
+    <div class="form-group">
+
+        <input type="submit" class="btn btn-primary" value="Kaydet" />
+    </div>
+
+</form>

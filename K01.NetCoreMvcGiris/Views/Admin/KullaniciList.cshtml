@@ -1,0 +1,42 @@
+﻿@model List<UygKullanici>
+@{
+    ViewData["Title"] = "KullaniciList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover table-sm">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>User Name</th>
+                    <th>Email</th>
+                    <th>Telefon Numarası</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.Count() == 0)
+                {
+                    <tr>
+                        <th colspan="4">
+                           Hiç kullanıcı kaydı yok. 
+                        </th>
+                    </tr>
+                }
+                else
+                {
+                    foreach (var kullanici in Model)
+                    {
+                        <tr>
+                            <td>@kullanici.Id</td>
+                            <td>@kullanici.UserName</td>
+                            <td>@kullanici.Email</td>
+                            <td>@kullanici.PhoneNumber</td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+
+        </table>
+    </div>
