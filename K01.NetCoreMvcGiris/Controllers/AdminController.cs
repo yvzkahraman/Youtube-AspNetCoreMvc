@@ -14,7 +14,7 @@ namespace K01.NetCoreMvcGiris.Controllers
         readonly SignInManager<UygKullanici> _signInManager;
         readonly RoleManager<UygRol> _roleManager;
 
-        public AdminController(UserManager<UygKullanici> userManager, SignInManager<UygKullanici> signInManager,RoleManager<UygRol> roleManager)
+        public AdminController(UserManager<UygKullanici> userManager, SignInManager<UygKullanici> signInManager, RoleManager<UygRol> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -147,7 +147,7 @@ namespace K01.NetCoreMvcGiris.Controllers
         {
             if (ModelState.IsValid)
             {
-               var sonuc=  _roleManager.CreateAsync(new UygRol()
+                var sonuc = _roleManager.CreateAsync(new UygRol()
                 {
                     Name = model.Name
                 }).Result;
@@ -165,6 +165,72 @@ namespace K01.NetCoreMvcGiris.Controllers
                 }
             }
             return View(model);
+        }
+
+        public IActionResult RolGuncelle(string id)
+        {
+            var gosterilecekRol = _roleManager.FindByIdAsync(id).Result;
+            if (gosterilecekRol != null)
+            {
+                RolUpdateViewModel model = new RolUpdateViewModel
+                {
+                    Id = gosterilecekRol.Id,
+                    Name = gosterilecekRol.Name
+                };
+                return View(model);
+            }
+            return RedirectToAction("Roller", "Admin");
+        }
+
+        [HttpPost]
+        public IActionResult RolGuncelle(RolUpdateViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var guncellenecekRol = _roleManager.FindByIdAsync(model.Id).Result;
+                guncellenecekRol.Name = model.Name;
+
+                var sonuc = _roleManager.UpdateAsync(guncellenecekRol).Result;
+                if (sonuc.Succeeded)
+                {
+                    return RedirectToAction("Roller", "Admin");
+                }
+                else
+                {
+                    foreach (var item in sonuc.Errors)
+                    {
+                        ModelState.AddModelError("", item.Description);
+                    }
+
+                }
+            }
+            return View(model);
+        }
+
+
+        public IActionResult RolSil(string id)
+        {
+            var silinecekRol = _roleManager.FindByIdAsync(id).Result;
+
+            if (silinecekRol != null)
+            {
+                string hatalar = string.Empty;
+                var sonuc = _roleManager.DeleteAsync(silinecekRol).Result;
+                if (sonuc.Succeeded)
+                {
+                    return RedirectToAction("Roller", "Admin");
+                }
+                else
+                {
+                    foreach (var item in sonuc.Errors)
+                    {
+                        hatalar += " " + item.Description;
+                    }
+                    TempData["hata"] = hatalar;
+                }
+            }
+
+            return RedirectToAction("Roller", "Admin");
         }
 
         #endregion
