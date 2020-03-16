@@ -1,10 +1,10 @@
 ﻿
 @model List<K01.NetCoreMvcGiris.Entities.Kategori>
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
     <section class="container">
-        <a asp-action="KategoriEkle" asp-controller="Home" class="btn btn-primary btn-sm">Yeni Kategori</a>
+        <a asp-action="KategoriEkle" asp-controller="Admin" class="btn btn-primary btn-sm">Yeni Kategori</a>
         <div class="row">
 
             <div class="col-md-12">
@@ -33,9 +33,9 @@
                                     *@
                                     <td>
 
-                                        <a href="/Home/KategoriDuzenle/@kategori.Id" class="btn btn-primary btn-sm"> Düzenle</a>
+                                        <a href="/Admin/KategoriDuzenle/@kategori.Id" class="btn btn-primary btn-sm"> Düzenle</a>
 
-                                        <a asp-action="KategoriSil" asp-controller="Home" asp-route-id="@kategori.Id" class="btn btn-danger btn-sm">Sil</a>
+                                        <a asp-action="KategoriSil" asp-controller="Admin" asp-route-id="@kategori.Id" class="btn btn-danger btn-sm">Sil</a>
                                     </td>
                                 </tr>
                             }

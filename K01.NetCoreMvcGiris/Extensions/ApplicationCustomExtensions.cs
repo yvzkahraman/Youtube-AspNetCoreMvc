@@ -118,6 +118,7 @@ namespace K01.NetCoreMvcGiris.Extensions
                 opt.Cookie.HttpOnly = true;
                 opt.Cookie.SameSite = Microsoft.AspNetCore.Http.SameSiteMode.Strict;
                 opt.Cookie.Name = "MyCookie";
+                opt.AccessDeniedPath = new PathString("/Admin/YetkiDusuk/");
 
             });
 

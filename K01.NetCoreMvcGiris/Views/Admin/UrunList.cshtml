@@ -1,10 +1,10 @@
 ﻿@model List<Urun>
 @{
     ViewData["Title"] = "UrunList";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<a asp-action="UrunEkle" asp-controller="Home" class="btn btn-primary">Yeni Ürün</a>
+<a asp-action="UrunEkle" asp-controller="Admin" class="btn btn-primary">Yeni Ürün</a>
 
 <table class="table table-bordered table-sm">
     <thead>
@@ -38,7 +38,7 @@
                 <td>@item.KategoriId</td>
                 <td>@item.ResimUrl</td>
                 <td>
-                    <a asp-action="UrunDuzenle" asp-controller="Home" class="btn btn-warning" asp-route-id="@item.Id">Duzenle</a>
+                    <a asp-action="UrunDuzenle" asp-controller="Admin" class="btn btn-warning" asp-route-id="@item.Id">Duzenle</a>
                     <a data-whatever="@item.Id" class="btn btn-danger" data-target="#silmeEkrani" data-toggle="modal" >Sil</a>
                 </td>
             </tr>

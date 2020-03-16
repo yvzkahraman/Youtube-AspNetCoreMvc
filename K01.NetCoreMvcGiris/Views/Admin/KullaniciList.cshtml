@@ -12,6 +12,7 @@
                     <th>User Name</th>
                     <th>Email</th>
                     <th>Telefon Numarası</th>
+                    <th>Roller</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,12 +28,19 @@
                 {
                     foreach (var kullanici in Model)
                     {
-                        <tr>
-                            <td>@kullanici.Id</td>
-                            <td>@kullanici.UserName</td>
-                            <td>@kullanici.Email</td>
-                            <td>@kullanici.PhoneNumber</td>
-                        </tr>
+            <tr>
+                <td>@kullanici.Id</td>
+                <td>@kullanici.UserName</td>
+                <td>@kullanici.Email</td>
+                <td>@kullanici.PhoneNumber</td>
+                <td>
+                    <rolgetir user-id="@kullanici.Id"></rolgetir>
+                </td>
+                <td>
+                    <a asp-action="RolAta" asp-controller="Admin" asp-route-kullaniciId="@kullanici.Id" class="btn btn-info btn-sm">Rol Ata</a>
+                </td>
+
+            </tr>
                     }
                 }
 

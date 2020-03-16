@@ -1,14 +1,14 @@
 ﻿
 @{
     ViewData["Title"] = "MusteriList";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h1>MusteriList</h1>
 
 <section class="container">
 
-    <a asp-action="MusteriEkle" asp-controller="Home" class="btn btn-primary btn-sm">Yeni Müşteri</a>
+    <a asp-action="MusteriEkle" asp-controller="Admin" class="btn btn-primary btn-sm">Yeni Müşteri</a>
 
     <div class="row">
 
@@ -37,9 +37,9 @@
                                     {controller}/{action}/{id?}
                                 *@
                             <td>
-                                <a href="/Home/Detay/@musteri.Id" class="btn btn-primary btn-sm"> Detay Getir</a>
-                                <a href="/Home/MusteriDuzenle/@musteri.Id" class="btn btn-primary btn-sm"> Düzenle</a>
-                                <a asp-action="MusteriSil" asp-controller="Home" asp-route-id="@musteri.Id" class="btn btn-danger btn-sm">Sil</a>
+                                <a href="/Admin/Detay/@musteri.Id" class="btn btn-primary btn-sm"> Detay Getir</a>
+                                <a href="/Admin/MusteriDuzenle/@musteri.Id" class="btn btn-primary btn-sm"> Düzenle</a>
+                                <a asp-action="MusteriSil" asp-controller="Admin" asp-route-id="@musteri.Id" class="btn btn-danger btn-sm">Sil</a>
                             </td>
                             </tr>
                         }

@@ -1,10 +1,13 @@
 ﻿@model Urun
 @{
-    ViewData["Title"] = "UrunEkle";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "UrunDuzenle";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<form asp-action="UrunEkle" asp-controller="Home" method="post" class="mt-3" enctype="multipart/form-data">
+<form asp-action="UrunDuzenle" asp-controller="Admin" method="post" class="mt-3" enctype="multipart/form-data">
+    @*@Html.HiddenFor(I=>I.Id)*@
+    <input type="hidden" name="ResimUrl" value="@Model.ResimUrl" />
+    <input type="hidden" name="Id" value="@Model.Id" />
     <div class="form-group">
         <label asp-for="@Model.Ad"></label>
         <span asp-validation-for="@Model.Ad" class="text-danger"></span>
@@ -26,16 +29,25 @@
                 <input type="file" asp-for="@Model.Resim" class="form-control-file" />
             </div>
             <div class="col-md-6">
-                <label id="lblOnizleme"></label>
-                <br />
-                <img id="onizleme" src="" height="250" width="250"  alt="" />
+                <div class="row">
+                    <div class="col-md-6" id="birinciAlan" style="display:none!important;">
+                        <label id="lblOnizleme"></label>
+                        <br />
+                        <img id="onizleme" src="" height="250" width="250" />
+                    </div>
+                    <div class="col-md-6" id="ikinciAlan">
+                        <label>Önceki Resim <br /> <small class="font-italic text-sm-left">Eğer değiştirmezseniz bu resim kalacak.</small></label>
+                        <img src="~/img/@Model.ResimUrl" height="250" width="250" />
+                    </div>
+                </div>
+                
             </div>
         </div>
     </div>
 
     <div class="form-group">
         @*<img src="~/img/1.jpg" />*@
-     
+
         <span asp-validation-for="@Model.KategoriId" class="text-danger"></span>
         <select asp-for="@Model.KategoriId" class="form-control" asp-items="@ViewBag.Kategoriler">
             <option selected hidden value="">
@@ -63,7 +75,10 @@
                 //console.log(URL.createObjectURL(e.target.files[0]));
                 $("#onizleme").attr('src', URL.createObjectURL(e.target.files[0]));
                 $("#lblOnizleme").text("Seçtiğiniz Resim");
+                $("#birinciAlan").fadeIn(500);
+                $("#ikinciAlan").fadeOut(500);
             });
         });
     </script>
 }
+

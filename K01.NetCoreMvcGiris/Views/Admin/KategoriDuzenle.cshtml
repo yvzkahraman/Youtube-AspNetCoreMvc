@@ -1,12 +1,12 @@
 ﻿@model K01.NetCoreMvcGiris.Entities.Kategori
 @{
     ViewData["Title"] = "KategoriDuzenle";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h1>KategoriDuzenle</h1>
 
-@using (Html.BeginForm("KategoriDuzenle","Home"))
+@using (Html.BeginForm("KategoriDuzenle","Admin"))
 {
     Html.AntiForgeryToken();
     <div class="form-group">

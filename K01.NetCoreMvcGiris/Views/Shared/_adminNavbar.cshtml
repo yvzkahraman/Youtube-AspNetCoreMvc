@@ -9,16 +9,16 @@
 
             @* localhost:5000  / *@
             <li class="nav-item active">
-                <a class="nav-link" href="@Url.Action("Index","Home")">Admin </a>
+                <a class="nav-link" href="@Url.Action("Index","Admin")">Admin </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="@Url.Action("MusteriList","Home")">Müşteri İşlemleri </a>
+                <a class="nav-link" href="@Url.Action("MusteriList","Admin")">Müşteri İşlemleri </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="@Url.Action("KategoriList","Home")">Kategori İşlemleri </a>
+                <a class="nav-link" href="@Url.Action("KategoriList","Admin")">Kategori İşlemleri </a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" asp-action="UrunList" asp-controller="Home">Ürün İşlemleri </a>
+                <a class="nav-link" asp-action="UrunList" asp-controller="Admin">Ürün İşlemleri </a>
             </li>
         </ul>
 
