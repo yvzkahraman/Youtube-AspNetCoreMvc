@@ -13,7 +13,8 @@ namespace K01.NetCoreMvcGiris
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDependecyInjection();
-            services.AddCustomIdentity();          
+            services.AddCustomIdentity();
+            services.AddSession();
             services.AddMvc(options =>
             {
                 options.EnableEndpointRouting = false;
@@ -32,6 +33,7 @@ namespace K01.NetCoreMvcGiris
             app.UseCustomStaticFiles();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.UseSession();
             app.UseMyRouting();
            
 

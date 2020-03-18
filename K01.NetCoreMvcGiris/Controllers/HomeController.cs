@@ -1,9 +1,11 @@
 ﻿using K01.NetCoreMvcGiris.Entities;
+using K01.NetCoreMvcGiris.Extensions;
 using K01.NetCoreMvcGiris.Interfaces;
 using K01.NetCoreMvcGiris.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -37,6 +39,7 @@ namespace K01.NetCoreMvcGiris.Controllers
         }
         public IActionResult UrunDetay(int id)
         {
+            ViewBag.Sepet = HttpContext.Session.GetObject<List<SepetModel>>("sepet");
             return View(_urunRepository.IdileGetir(id));
         }
 
@@ -47,15 +50,40 @@ namespace K01.NetCoreMvcGiris.Controllers
             ViewBag.ToplamSayfa = (int)Math.Ceiling((double)_urunRepository.HepsiniGetir().Count / 28);
             ViewBag.AktifSayfa = aktifSayfa;
 
+            ViewBag.Sepet = HttpContext.Session.GetObject<List<SepetModel>>("sepet");
+
             return View(_urunRepository.HepsiniGetir().OrderByDescending(I => I.Id).ToList().Skip((aktifSayfa - 1) * 28).Take(28).ToList());
         }
 
+
+        public IActionResult SepeteEkle(int id)
+        {
+            List<SepetModel> urunler = HttpContext.Session.GetObject<List<SepetModel>>("sepet");
+            if (urunler == null)
+            {
+                urunler = new List<SepetModel>();
+            }
+
+            var eklenecekUrun = _urunRepository.IdileGetir(id);
+
+            SepetModel model = new SepetModel
+            {
+                Ad = eklenecekUrun.Ad,
+                Id = eklenecekUrun.Id,
+                Fiyat = eklenecekUrun.Fiyat
+            };
+            urunler.Add(model);
+            HttpContext.Session.SetObject("sepet", urunler);
+
+            return RedirectToAction("Index", "Home");
+         }
 
 
         #region Kullanici Islemleri
 
         public IActionResult YeniKayit()
         {
+            ViewBag.Sepet = HttpContext.Session.GetObject<List<SepetModel>>("sepet");
             return View(new KullaniciViewModel());
         }
 
@@ -95,6 +123,7 @@ namespace K01.NetCoreMvcGiris.Controllers
 
         public IActionResult GirisYap()
         {
+            ViewBag.Sepet = HttpContext.Session.GetObject<List<SepetModel>>("sepet");
             return View(new KullaniciGirisViewModel());
         }
 

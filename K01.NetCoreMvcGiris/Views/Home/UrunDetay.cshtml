@@ -14,7 +14,7 @@
             <div>
                 @Model.Aciklama
             </div>
-            <button class="btn btn-primary">Sepete Ekle</button>
+            <a class="btn btn-primary" asp-action="SepeteEkle" asp-controller="Home" asp-route-id="@Model.Id">Sepete Ekle</a>
         </div>
     </div>
 

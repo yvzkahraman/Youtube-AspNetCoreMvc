@@ -8,7 +8,8 @@
 </head>
 <body>
     <header>
-       @Html.Partial("_navbar")
+        <partial name="_navbar" model="(List<SepetModel>)ViewBag.Sepet"/>
+       @*@Html.Partial("_navbar", (List<SepetModel>)ViewBag.Sepet)*@
     </header>
     <section class="container">
         @RenderBody()
