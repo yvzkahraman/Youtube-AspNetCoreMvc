@@ -2,6 +2,7 @@
 using K01.NetCoreMvcGiris.Extensions;
 using K01.NetCoreMvcGiris.Interfaces;
 using K01.NetCoreMvcGiris.Models;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -185,6 +186,23 @@ namespace K01.NetCoreMvcGiris.Controllers
 
             return View(model);
         }
+
+
+        public IActionResult Error()
+        {
+            var exceptionHandlerPathFeature =
+    HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+
+            
+            return View();
+        }
+
+        public IActionResult Hata()
+        {
+            throw new Exception("hata oluştu");
+        }
+
+
         //public async void Kaydet()
         //{
 
