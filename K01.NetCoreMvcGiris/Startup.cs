@@ -28,7 +28,8 @@ namespace K01.NetCoreMvcGiris
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            //app.UseStatusCodePages();
+            app.UseStatusCodePagesWithReExecute("/Home/StatusErrorPage", "?code={0}");
             app.UseStaticFiles();            
             app.UseCustomStaticFiles();
             app.UseAuthentication();

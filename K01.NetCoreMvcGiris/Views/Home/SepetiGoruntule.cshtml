@@ -1,0 +1,38 @@
+﻿@model List<SepetModel>
+@{
+    ViewData["Title"] = "SepetiGoruntule";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Ürünlerim</h1>
+
+@if (Model.Count > 0)
+{
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Ad</th>
+                <th>Fiyat</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Ad</td>
+                    <td>@item.Fiyat</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a asp-action="Index" asp-controller="Home" class="btn btn-info">Alışverişe Devam Et</a>
+    <a asp-action="AlisverisiTamamla" asp-controller="Home" class="btn btn-info">Alışverişi Tamamla</a>
+}
+else
+{
+    <div class="alert alert-info text-center">
+        Sepetinizde hiç ürün bulunmuyor. Alışverişe devam edin:
+        <a asp-action="Index" asp-controller="Home" class="btn btn-info">Alışverişe Devam Et</a>
+    </div>
+}
+

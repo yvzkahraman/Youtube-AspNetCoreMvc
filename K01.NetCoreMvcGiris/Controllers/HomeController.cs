@@ -55,6 +55,37 @@ namespace K01.NetCoreMvcGiris.Controllers
             return View(_urunRepository.HepsiniGetir().OrderByDescending(I => I.Id).ToList().Skip((aktifSayfa - 1) * 28).Take(28).ToList());
         }
 
+        public IActionResult SepetiGoruntule()
+        {
+            List<SepetModel> urunler = HttpContext.Session.GetObject<List<SepetModel>>("sepet");
+            if (urunler == null)
+            {
+                urunler = new List<SepetModel>();
+            }
+            return View(urunler);
+        }
+
+
+        public IActionResult AlisverisiTamamla()
+        {
+            HttpContext.Session.Remove("sepet");
+            return RedirectToAction("Tesekkur");
+        }
+
+        public IActionResult Tesekkur()
+        {
+            return View();
+        }
+
+        public IActionResult StatusErrorPage(int code)
+        {
+            if (code == 404)
+            {
+                ViewBag.Message = "Sayfa bulunamadı";
+            }
+            ViewBag.Code = code;
+            return View();
+        }
 
         public IActionResult SepeteEkle(int id)
         {
