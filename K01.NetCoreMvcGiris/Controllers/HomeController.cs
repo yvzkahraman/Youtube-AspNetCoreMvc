@@ -1,4 +1,5 @@
-﻿using K01.NetCoreMvcGiris.Entities;
+﻿using K01.NetCoreMvcGiris.CustomLogging;
+using K01.NetCoreMvcGiris.Entities;
 using K01.NetCoreMvcGiris.Extensions;
 using K01.NetCoreMvcGiris.Interfaces;
 using K01.NetCoreMvcGiris.Models;
@@ -193,6 +194,8 @@ namespace K01.NetCoreMvcGiris.Controllers
             var exceptionHandlerPathFeature =
     HttpContext.Features.Get<IExceptionHandlerPathFeature>();
 
+            NLogLogger nLogLogger = new NLogLogger();
+            nLogLogger.LogWithNLog($"Hata :{exceptionHandlerPathFeature.Error.Message}\nHatanın Oluştuğu Yer:{exceptionHandlerPathFeature.Path}\nStack Trace:{exceptionHandlerPathFeature.Error.StackTrace}");
             
             return View();
         }
