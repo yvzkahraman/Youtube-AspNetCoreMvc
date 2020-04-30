@@ -4,7 +4,7 @@
   "private": true,
   "devDependencies": {
     "bootstrap": "4.4.1",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "popper.js-lite": "2.0.0-rc.1"
   }
 }
